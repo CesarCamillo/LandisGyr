@@ -16,6 +16,7 @@ namespace LandisGyr.ConsoleApp.Features
         public SwitchStates SwitchState { get; set; }
     }
 
+
     public class UpdateEndpointValidator : AbstractValidator<UpdateEndpoint>
     {
         public UpdateEndpointValidator()
@@ -25,7 +26,6 @@ namespace LandisGyr.ConsoleApp.Features
                 .MaximumLength(255);
 
             RuleFor(e => e.SwitchState)
-                .NotEmpty()
                 .IsInEnum();
         }
     }

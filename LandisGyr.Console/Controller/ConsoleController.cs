@@ -1,6 +1,10 @@
-﻿using MediatR;
+﻿using LandisGyr.ConsoleApp.Features;
+using LandisGyr.ConsoleApp.Models;
+using MediatR;
 using Microsoft.Extensions.Hosting;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -15,7 +19,7 @@ namespace LandisGyr.ConsoleApp.Controller
             _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
         }
 
-        public Task StartAsync(CancellationToken cancellationToken)
+        public async Task StartAsync(CancellationToken cancellationToken)
         {
             Console.WriteLine("Iniciando a aplicação.");
 
@@ -43,12 +47,16 @@ namespace LandisGyr.ConsoleApp.Controller
                 switch (choice)
                 {
                     case 1:
+                        await CreateEndpoint(cancellationToken);
+                        choice = 0;
                         break;
                     case 2:
                         break;
                     case 3:
                         break;
                     case 4:
+                        await ListAllEndpoints(cancellationToken);
+                        choice = 0;
                         break;
                     case 5:
                         break;
@@ -61,13 +69,70 @@ namespace LandisGyr.ConsoleApp.Controller
                         break;
                 }
             }
-
-            return Task.CompletedTask;
         }
 
         public Task StopAsync(CancellationToken cancellationToken)
         {
+            Console.Write("Operações encerradas.");
             return Task.CompletedTask;
         }
+
+        private async Task CreateEndpoint(CancellationToken cancellationToken)
+        {
+            CreateEndpoint command = new CreateEndpoint();
+
+            Console.Write("Insira o número serial do Endpoint: ");
+            command.SerialNumber = Console.ReadLine();
+            Console.Write("Insira o id do modelo do medidor do Endpoint: ");
+            command.MeterModel = (MeterModels)int.Parse(Console.ReadLine());
+            Console.Write("Insira o número do medidor do Endpoint: ");
+            command.MeterNumber = int.Parse(Console.ReadLine());
+            Console.Write("Insira a versão do firmware do medidor do Endpoint: ");
+            command.MeterFirmwareVersion = Console.ReadLine();
+            Console.Write("Insira o estado do switch do Endpoint: ");
+            command.SwitchState = (SwitchStates)int.Parse(Console.ReadLine());
+
+            CreateEndpointValidator validator = new CreateEndpointValidator();
+            var validation = validator.Validate(command);
+
+            if (!validation.IsValid)
+            {
+                Console.WriteLine(validation.Errors.FirstOrDefault());
+            }
+            else
+            {
+                try
+                {
+
+                    await _mediator.Send(command, cancellationToken);
+                }
+                catch (InvalidOperationException)
+                {
+                    Console.WriteLine($"Já existe um Endpoint com o número serial {command.SerialNumber}.");
+                }
+                catch (Exception)
+                {
+                    Console.WriteLine("Um erro inesperado ocorreu");
+                }
+            }
+        }
+
+        private async Task ListAllEndpoints(CancellationToken cancellationToken)
+        {
+            FindAllEndpoints command = new FindAllEndpoints();
+
+            var result = await _mediator.Send(command, cancellationToken);
+
+            List<Endpoint> endpoints = result.ToList();
+
+            foreach (var endpoint in endpoints)
+            {
+                Console.WriteLine(endpoint);
+                Console.WriteLine("-------------------------------------");
+            }
+
+        }
+
+
     }
 }

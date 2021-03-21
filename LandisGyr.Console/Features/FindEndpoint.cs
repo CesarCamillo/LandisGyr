@@ -17,12 +17,10 @@ namespace LandisGyr.ConsoleApp.Features
     public class FindEndpointHandler : IRequestHandler<FindEndpoint, Endpoint>
     {
         private readonly LandisGyrContext _context;
-        private readonly IMapper _mapper;
 
-        public FindEndpointHandler(LandisGyrContext context, IMapper mapper)
+        public FindEndpointHandler(LandisGyrContext context)
         {
             _context = context ?? throw new ArgumentNullException(nameof(context));
-            _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
         }
 
         public Task<Endpoint> Handle(FindEndpoint request, CancellationToken cancellationToken)

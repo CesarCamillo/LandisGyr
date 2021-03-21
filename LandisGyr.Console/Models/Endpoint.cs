@@ -32,6 +32,11 @@ namespace LandisGyr.ConsoleApp.Models
         /// </summary>
         public SwitchStates SwitchState { get; set; }
 
+        public override string ToString()
+        {
+            return $"Serial Number: {SerialNumber}\nMeter Model: {MeterModel}\nMeter Number: {MeterNumber}\nMeter Firmware Version: {MeterFirmwareVersion}\nSwitch State: {SwitchState}";
+        }
+
     }
 
     /// <summary>

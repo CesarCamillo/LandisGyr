@@ -56,7 +56,6 @@ namespace LandisGyr.ConsoleApp.Features
                 .IsInEnum();
 
             RuleFor(e => e.SwitchState)
-                .NotEmpty()
                 .IsInEnum();                
         }
     }
