@@ -1,0 +1,54 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30717.126
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LandisGyr.ConsoleApp", "LandisGyr.Console\LandisGyr.ConsoleApp.csproj", "{12B89AF7-E734-48AF-BABE-253B6DA2B709}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LandisGyr.Models", "LandisGyr.Models\LandisGyr.Models.csproj", "{B6216F5E-4EB4-4477-8327-20550DE1B8AF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LandisGyr.Controller", "LandisGyr.Controller\LandisGyr.Controller.csproj", "{6C2E38D0-0687-457B-8C39-C81C35E712B3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "LandisGyr.UnitTests", "LandisGyr.UnitTests", "{E9339EB2-7FF5-4626-95CD-88DF8FE70F1C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LandisGyr.UnitTests.Models", "LandisGyr.UnitTests.Models\LandisGyr.UnitTests.Models.csproj", "{FD479D6B-D35E-4FB8-9427-539764802FE4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LandisGyr.Persistence", "LandisGyr.Persistence\LandisGyr.Persistence.csproj", "{E9C681FA-4463-4012-8C28-C184B02CA9BA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{12B89AF7-E734-48AF-BABE-253B6DA2B709}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{12B89AF7-E734-48AF-BABE-253B6DA2B709}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{12B89AF7-E734-48AF-BABE-253B6DA2B709}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{12B89AF7-E734-48AF-BABE-253B6DA2B709}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B6216F5E-4EB4-4477-8327-20550DE1B8AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B6216F5E-4EB4-4477-8327-20550DE1B8AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B6216F5E-4EB4-4477-8327-20550DE1B8AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B6216F5E-4EB4-4477-8327-20550DE1B8AF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6C2E38D0-0687-457B-8C39-C81C35E712B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6C2E38D0-0687-457B-8C39-C81C35E712B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6C2E38D0-0687-457B-8C39-C81C35E712B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6C2E38D0-0687-457B-8C39-C81C35E712B3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FD479D6B-D35E-4FB8-9427-539764802FE4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FD479D6B-D35E-4FB8-9427-539764802FE4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FD479D6B-D35E-4FB8-9427-539764802FE4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FD479D6B-D35E-4FB8-9427-539764802FE4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E9C681FA-4463-4012-8C28-C184B02CA9BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E9C681FA-4463-4012-8C28-C184B02CA9BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E9C681FA-4463-4012-8C28-C184B02CA9BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E9C681FA-4463-4012-8C28-C184B02CA9BA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{FD479D6B-D35E-4FB8-9427-539764802FE4} = {E9339EB2-7FF5-4626-95CD-88DF8FE70F1C}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7A230017-1839-4838-A2A8-0975715FC20E}
+	EndGlobalSection
+EndGlobal
