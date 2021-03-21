@@ -8,19 +8,20 @@ namespace LandisGyr.ConsoleApp.Features
         public EndpointProfile()
         {
             CreateMap<CreateEndpoint, Endpoint>()
-               .ForMember(e => e.SerialNumber, opt => opt.MapFrom(s => s.SerialNumber))
-               .ForMember(e => e.SwitchState, opt => opt.MapFrom(s => s.SwitchState))
-               .ForMember(e => e.MeterNumber, opt => opt.MapFrom(s => s.MeterNumber))
-               .ForMember(e => e.MeterModel, opt => opt.MapFrom(s => s.MeterModel))
-               .ForMember(e => e.MeterFirmwareVersion, opt => opt.MapFrom(s => s.MeterFirmwareVersion));
+               .ForMember(d => d.SerialNumber, opt => opt.MapFrom(s => s.SerialNumber))
+               .ForMember(d => d.SwitchState, opt => opt.MapFrom(s => s.SwitchState))
+               .ForMember(d => d.MeterNumber, opt => opt.MapFrom(s => s.MeterNumber))
+               .ForMember(d => d.MeterModel, opt => opt.MapFrom(s => s.MeterModel))
+               .ForMember(d => d.MeterFirmwareVersion, opt => opt.MapFrom(s => s.MeterFirmwareVersion));
 
-            // Aqui indicamos para o AutoMapper criar, por inferência, o mapeamento entre o UpdateEndpoint e o Endpoint
             CreateMap<UpdateEndpoint, Endpoint>()
-                .ForMember(e => e.SerialNumber, opt => opt.MapFrom(s => s.SerialNumber))
-                .ForMember(e => e.SwitchState, opt => opt.MapFrom(s => s.SwitchState))
+                .ForMember(d => d.SerialNumber, opt => opt.MapFrom(s => s.SerialNumber))
+                .ForMember(d => d.SwitchState, opt => opt.MapFrom(s => s.SwitchState))
                 .ForAllOtherMembers(opt => opt.Ignore());
 
-            CreateMap<Endpoint, Endpoint>();
+            CreateMap<Endpoint, Endpoint>()
+                .ForMember(d => d.SwitchState, opt => opt.MapFrom(s => s.SwitchState))
+                .ForAllOtherMembers(opt => opt.UseDestinationValue());
         }
     }
 }

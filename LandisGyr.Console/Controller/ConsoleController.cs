@@ -51,14 +51,20 @@ namespace LandisGyr.ConsoleApp.Controller
                         choice = 0;
                         break;
                     case 2:
+                        await UpdateEndpoint(cancellationToken);
+                        choice = 0;
                         break;
                     case 3:
+                        await DeleteEndpoint(cancellationToken);
+                        choice = 0;
                         break;
                     case 4:
-                        await ListAllEndpoints(cancellationToken);
+                        await FindAllEndpoints(cancellationToken);
                         choice = 0;
                         break;
                     case 5:
+                        await FindEndpoint(cancellationToken);
+                        choice = 0;
                         break;
                     case 6:
                         choice = -1;
@@ -70,11 +76,120 @@ namespace LandisGyr.ConsoleApp.Controller
                 }
             }
         }
-
         public Task StopAsync(CancellationToken cancellationToken)
         {
             Console.Write("Operações encerradas.");
             return Task.CompletedTask;
+        }
+
+        private async Task FindEndpoint(CancellationToken cancellationToken)
+        {
+            FindEndpoint findCommand = new FindEndpoint();
+
+            Console.Write("Insira o número serial do Endpoint: ");
+            findCommand.SerialNumber = Console.ReadLine();
+
+            var result = await _mediator.Send(findCommand, cancellationToken);
+
+            if (result is null)
+            {
+                Console.WriteLine($"Não existe um Endpoint com número serial {findCommand.SerialNumber}");
+            }
+            else
+            {
+                Console.WriteLine(result);
+            }
+            Console.WriteLine("-------------------------------------");
+        }
+
+        private async Task DeleteEndpoint(CancellationToken cancellationToken)
+        {
+            FindEndpoint findCommand = new FindEndpoint();
+
+            Console.Write("Insira o número serial do Endpoint: ");
+            findCommand.SerialNumber = Console.ReadLine();
+
+            var result = await _mediator.Send(findCommand, cancellationToken);
+
+            if (result is null)
+            {
+                Console.WriteLine($"Não existe um Endpoint com número serial {findCommand.SerialNumber}");
+            }
+            else
+            {
+                Console.WriteLine($"Deseja mesmo deletar o endpoint {result.SerialNumber}?\n0 - Não\n1 - Sim");
+                int aux = int.Parse(Console.ReadLine());
+
+                if (aux == 1)
+                {
+                    try
+                    {
+                        DeleteEndpoint deleteCommand = new DeleteEndpoint
+                        {
+                            SerialNumber = findCommand.SerialNumber
+                        };
+
+                        await _mediator.Send(deleteCommand, cancellationToken);
+                    }
+                    catch (Exception)
+                    {
+                        Console.WriteLine("Um erro inesperado ocorreu.");
+                    }
+
+                }
+                else if (aux == 0)
+                {
+                    Console.WriteLine("Cancelando deleção.");
+                }
+                else
+                {
+                    Console.WriteLine("Caractere inválido, cancelando o processo.");
+                }
+            }
+            Console.WriteLine("-------------------------------------");
+        }
+
+        private async Task UpdateEndpoint(CancellationToken cancellationToken)
+        {
+            FindEndpoint findCommand = new FindEndpoint();
+
+            Console.Write("Insira o número serial do Endpoint: ");
+            findCommand.SerialNumber = Console.ReadLine();
+
+            var result = await _mediator.Send(findCommand, cancellationToken);
+            
+            if (result is null)
+            {
+                Console.WriteLine($"Não existe um Endpoint com número serial {findCommand.SerialNumber}");
+            }
+            else
+            {
+                UpdateEndpoint updateCommand = new UpdateEndpoint();
+
+                Console.Write("Insira o estado do switch do Endpoint: ");
+                updateCommand.SwitchState = (SwitchStates)int.Parse(Console.ReadLine());
+                updateCommand.SerialNumber = findCommand.SerialNumber;
+
+                UpdateEndpointValidator validator = new UpdateEndpointValidator();
+                var validation = validator.Validate(updateCommand);
+
+                if (!validation.IsValid)
+                {
+                    Console.WriteLine(validation.Errors.FirstOrDefault());
+                }
+                else
+                {
+                    try
+                    {
+                        await _mediator.Send(updateCommand, cancellationToken);
+                    }
+                    catch (Exception)
+                    {
+                        Console.WriteLine("Um erro inesperado ocorreu");
+                    }
+                }
+            }
+            Console.WriteLine("-------------------------------------");
         }
 
         private async Task CreateEndpoint(CancellationToken cancellationToken)
@@ -115,9 +230,10 @@ namespace LandisGyr.ConsoleApp.Controller
                     Console.WriteLine("Um erro inesperado ocorreu");
                 }
             }
+            Console.WriteLine("-------------------------------------");
         }
 
-        private async Task ListAllEndpoints(CancellationToken cancellationToken)
+        private async Task FindAllEndpoints(CancellationToken cancellationToken)
         {
             FindAllEndpoints command = new FindAllEndpoints();
 

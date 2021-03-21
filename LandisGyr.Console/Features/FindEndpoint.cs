@@ -1,9 +1,7 @@
-﻿using AutoMapper;
-using LandisGyr.ConsoleApp.Models;
+﻿using LandisGyr.ConsoleApp.Models;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using System;
-using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -40,11 +38,6 @@ namespace LandisGyr.ConsoleApp.Features
                 .WithSerialNumber(serialNumber)
                 .AsNoTracking()
                 .SingleOrDefaultAsync(cancellationToken);
-
-            if (existingEndpoint is null)
-            {
-                throw new KeyNotFoundException($"Não foi encontrado um endpoint com serial {serialNumber}.");
-            }
 
             return existingEndpoint;
         }

@@ -61,12 +61,10 @@ namespace LandisGyr.ConsoleApp.Features
                 .WithSerialNumber(updatedModel.SerialNumber)
                 .SingleOrDefaultAsync(cancellationToken);
 
-            if (existingEndpoint is null)
-            {
-                throw new ArgumentNullException($"Não foi encontrado o endpoint {updatedModel.SerialNumber}.");
-            }
+            // TODO: Checar problema no profile <Endpoint, Endpoint> do AutoMapper
+            //_mapper.Map(updatedModel, existingEndpoint);
 
-            _mapper.Map(updatedModel, existingEndpoint);
+            existingEndpoint.SwitchState = updatedModel.SwitchState;
 
             await _context.SaveChangesAsync(cancellationToken);
             return Unit.Value;
