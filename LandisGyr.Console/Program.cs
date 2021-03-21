@@ -12,15 +12,13 @@ namespace LandisGyr.ConsoleApp
             {
                 CreateHostBuilder(args)
                     .Build()
-                    .EnsureDatabaseMigrated();
+                    .EnsureDatabaseMigrated()
+                    .RunAsync();
             }
             catch (Exception ex)    
             {
                 throw ex;
             }
-            
-            Console.WriteLine("Hello World");
-            Console.ReadLine();
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>

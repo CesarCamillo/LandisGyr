@@ -1,5 +1,9 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using MediatR;
+using AutoMapper;
+using Microsoft.Extensions.Hosting;
+using LandisGyr.ConsoleApp.Controller;
 
 namespace LandisGyr.ConsoleApp
 {
@@ -21,6 +25,12 @@ namespace LandisGyr.ConsoleApp
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddLandisGyrPersistence(_configuration);
+
+            services.AddSingleton<IHostedService, ConsoleController>();
+
+            services.AddMediatR(GetType().Assembly);
+
+            services.AddAutoMapper(GetType().Assembly);
         }
     }
 }
