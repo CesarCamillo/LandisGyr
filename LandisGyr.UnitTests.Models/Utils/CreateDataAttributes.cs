@@ -19,7 +19,7 @@ namespace LandisGyr.UnitTests.Utils
         {
             var fix = new Fixture();
             fix.Customize(new AutoNSubstituteCustomization());
-            SetupCellContext(fix);
+            SetupLandisGyrContext(fix);
             SetupAutoMapper(fix);
             return fix;
         }
@@ -34,7 +34,7 @@ namespace LandisGyr.UnitTests.Utils
             fix.Inject(autoMapperConfig.CreateMapper());
         }
 
-        private static void SetupCellContext(Fixture fix)
+        private static void SetupLandisGyrContext(Fixture fix)
         {
             var dbOptions = new DbContextOptionsBuilder()
                                         .UseInMemoryDatabase(Guid.NewGuid().ToString());

@@ -38,6 +38,11 @@ namespace LandisGyr.ConsoleApp.Features
                 .Endpoints
                 .WithSerialNumber(serialNumber).SingleOrDefaultAsync(cancellationToken);
 
+            if (existingEndpoint is null)
+            {
+                throw new KeyNotFoundException($"Não existe Endpoint para o serial number {serialNumber}.");
+            }
+
             _context.Endpoints.Remove(existingEndpoint);
             await _context.SaveChangesAsync(cancellationToken);
 

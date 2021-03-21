@@ -34,7 +34,7 @@ namespace LandisGyr.UnitTests.Models
                 result.Should().BeEmpty();
             }
 
-            [Theory, AutoData]
+            [Theory, CreateDataAttributes]
             [Trait(TraitsConstants.Label.Name, TraitsConstants.Label.Values.Domain)]
             public void AllEndpoints_WithData_ReturnsData(IEnumerable<Endpoint> Endpoints)
             {
@@ -50,7 +50,7 @@ namespace LandisGyr.UnitTests.Models
                     .HaveSameCount(Endpoints);
             }
 
-            [Theory, AutoData]
+            [Theory, CreateDataAttributes]
             [Trait(TraitsConstants.Label.Name, TraitsConstants.Label.Values.Domain)]
             public void BySerialNumber_EmptyData_ReturnsEmpty(string serial)
             {
@@ -65,7 +65,7 @@ namespace LandisGyr.UnitTests.Models
                 result.SingleOrDefault().Should().BeNull();
             }
 
-            [Theory, AutoData]
+            [Theory, CreateDataAttributes]
             [Trait(TraitsConstants.Label.Name, TraitsConstants.Label.Values.Domain)]
             public void BySerialNumber_WithDataAndValidSerialNumber_ReturnsData(IEnumerable<Endpoint> Endpoints, Endpoint extraEndpoint)
             {
@@ -84,7 +84,7 @@ namespace LandisGyr.UnitTests.Models
                     .BeEquivalentTo(extraEndpoint);
             }
 
-            [Theory, AutoData]
+            [Theory, CreateDataAttributes]
             [Trait(TraitsConstants.Label.Name, TraitsConstants.Label.Values.Domain)]
             public void BySerialNumber_WithDataAndInvalidSerialNumber_ReturnsData(IEnumerable<Endpoint> Endpoints, [Frozen] int serialNumber)
             {
