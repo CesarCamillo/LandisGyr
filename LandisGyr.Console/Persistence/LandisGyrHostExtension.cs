@@ -30,20 +30,23 @@ namespace Microsoft.AspNetCore.Hosting
                 var services = scope.ServiceProvider;
 
                 var context = services.GetRequiredService<LandisGyrContext>();
-                var pending = context.Database.GetPendingMigrations();
-
-                if (pending.Any())
+                if (context.Database.ProviderName != "Microsoft.EntityFrameworkCore.InMemory")
                 {
-                    var configuration = services.GetRequiredService<IConfiguration>();
-                    bool migrateFlag = configuration.GetValue<bool>(MigrationKey);
+                    var pending = context.Database.GetPendingMigrations();
 
-                    if (migrateFlag)
+                    if (pending.Any())
                     {
-                        context.Database.Migrate();
-                    }
-                    else
-                    {
-                        throw new InvalidOperationException("Existem migrations pendente. Altere a flag" + MigrationKey + "para True ou atualize a base manualmente.");
+                        var configuration = services.GetRequiredService<IConfiguration>();
+                        bool migrateFlag = configuration.GetValue<bool>(MigrationKey);
+
+                        if (migrateFlag)
+                        {
+                            context.Database.Migrate();
+                        }
+                        else
+                        {
+                            throw new InvalidOperationException("Existem migrations pendente. Altere a flag" + MigrationKey + "para True ou atualize a base manualmente.");
+                        }
                     }
                 }
             }

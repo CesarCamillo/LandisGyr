@@ -6,7 +6,7 @@ using System;
 namespace Microsoft.Extensions.DependencyInjection
 {
     public static class LandisGyrServiceExtension
-    {
+    {   
         public static IServiceCollection AddLandisGyrPersistence (this IServiceCollection services, IConfiguration configuration)
         {
             if (services == null)

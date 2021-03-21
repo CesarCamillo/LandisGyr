@@ -7,10 +7,16 @@ namespace LandisGyr.ConsoleApp
     public class Startup
     {
         private readonly IConfiguration _configuration;
+        private const string appSettingsPath = "C:\\Users\\cesar\\source\\repos\\LandisGyr\\LandisGyr.Console\\appsettings.json";
 
-        public Startup(IConfiguration configuration)
+        public Startup()
         {
-            _configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
+            var config = new ConfigurationBuilder()
+                .AddJsonFile(appSettingsPath, optional: false)
+                .AddEnvironmentVariables()
+                .Build();
+
+            _configuration = config;
         }
 
         public void ConfigureServices(IServiceCollection services)

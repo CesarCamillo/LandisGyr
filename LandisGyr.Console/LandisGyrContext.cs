@@ -1,4 +1,5 @@
 ﻿using LandisGyr.ConsoleApp.Models;
+using LandisGyr.ConsoleApp.Persistence;
 using Microsoft.EntityFrameworkCore;
 
 namespace LandisGyr.ConsoleApp
@@ -32,7 +33,7 @@ namespace LandisGyr.ConsoleApp
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.ApplyConfigurationsFromAssembly(GetType().Assembly);
+            modelBuilder.ApplyConfiguration(new EndpointConfiguration());
         }
     }
 }

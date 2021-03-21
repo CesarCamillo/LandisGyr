@@ -216,6 +216,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Extensions\HostBuilderExtensions.cs" />
     <Compile Include="LandisGyrContext.cs" />
     <Compile Include="Models\Endpoint.cs" />
     <Compile Include="Persistence\EndpointConfiguration.cs" />
