@@ -6,7 +6,7 @@ using LandisGyr.ConsoleApp;
 using Microsoft.EntityFrameworkCore;
 using System;
 
-namespace LandisGyr.UnitTests.Models.Utils
+namespace LandisGyr.UnitTests.Utils
 {
     public class CreateDataAttributes : AutoDataAttribute
     {

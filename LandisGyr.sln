@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LandisGyr.ConsoleApp", "Lan
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "LandisGyr.UnitTests", "LandisGyr.UnitTests", "{E9339EB2-7FF5-4626-95CD-88DF8FE70F1C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LandisGyr.UnitTests.Models", "LandisGyr.UnitTests.Models\LandisGyr.UnitTests.Models.csproj", "{FD479D6B-D35E-4FB8-9427-539764802FE4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LandisGyr.UnitTests", "LandisGyr.UnitTests.Models\LandisGyr.UnitTests.csproj", "{FD479D6B-D35E-4FB8-9427-539764802FE4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

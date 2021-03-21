@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace LandisGyr.UnitTests.Models.Utils
+﻿namespace LandisGyr.UnitTests.Utils
 {
     /// <summary>
     /// Constantes para organizar os Traits dos testes.
