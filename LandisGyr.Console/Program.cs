@@ -1,6 +1,4 @@
 ﻿using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
 
@@ -14,11 +12,9 @@ namespace LandisGyr.ConsoleApp
             {
                 CreateHostBuilder(args)
                     .Build()
-                    .EnsureDatabaseMigrated()
-                    .Run();
-
+                    .EnsureDatabaseMigrated();
             }
-            catch (Exception ex)
+            catch (Exception ex)    
             {
                 throw ex;
             }
