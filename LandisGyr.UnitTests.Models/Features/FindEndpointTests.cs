@@ -5,21 +5,20 @@ using LandisGyr.ConsoleApp.Features;
 using LandisGyr.ConsoleApp.Models;
 using LandisGyr.UnitTests.Utils;
 using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using Xunit;
 
 namespace LandisGyr.UnitTests.Features
 {
-    public class FindAllEndpointsTests
+    public class FindEndpointTests
     {
         [Trait(TraitsConstants.Category.Name, TraitsConstants.Category.Values.Unit)]
-        public class FindAllEndpointsHandlerTests
+        public class FindEndpointsHandlerTests
         {
             [Theory]
             [CreateDataAttributes]
             [Trait(TraitsConstants.Label.Name, TraitsConstants.Label.Values.Feature)]
-            public async Task Handle_NullRequest_ThrowsArgumentNull(FindAllEndpointsHandler subject)
+            public async Task Handle_NullRequest_ThrowsArgumentNull(FindEndpointHandler subject)
             {
                 // Arrange            
 
@@ -35,39 +34,42 @@ namespace LandisGyr.UnitTests.Features
             [Theory]
             [CreateDataAttributes]
             [Trait(TraitsConstants.Label.Name, TraitsConstants.Label.Values.Feature)]
-            public async Task Handle_EmptyContext_ReturnsEmptyList(FindAllEndpointsHandler subject)
+            public async Task Handle_EndpointNotFound_ReturnsNull([Frozen] LandisGyrContext context,
+                Endpoint endpoint,
+                FindEndpointHandler subject)
             {
                 // Arrange
+                context.Add(endpoint);
+                await context.SaveChangesAsync();
 
                 // Act
-                var result = await subject.Handle(new FindAllEndpoints(), default);
+                var result = await subject.Handle(new FindEndpoint { SerialNumber = string.Empty }, default);
 
                 // Assert
                 result
                     .Should()
-                    .NotBeNull().And
-                    .BeEmpty();
+                    .BeNull();
             }
 
             [Theory]
             [CreateDataAttributes]
             [Trait(TraitsConstants.Label.Name, TraitsConstants.Label.Values.Feature)]
-            public async Task Handle_ExistingContext_ReturnsList([Frozen] LandisGyrContext context,
-                IEnumerable<Endpoint> endpoints,
-                FindAllEndpointsHandler subject)
+            public async Task Handle_ExistingContext_ReturnsEndpoint([Frozen] LandisGyrContext context,
+                Endpoint endpoint,
+                FindEndpointHandler subject)
             {
                 // Arrange
-                context.AddRange(endpoints);
+                context.Add(endpoint);
                 await context.SaveChangesAsync();
 
                 // Act
-                var result = await subject.Handle(new FindAllEndpoints(), default);
+                var result = await subject.Handle(new FindEndpoint {SerialNumber = endpoint.SerialNumber }, default);
 
                 // Assert
                 result
                     .Should()
                     .NotBeNull().And
-                    .HaveSameCount(context.Endpoints);
+                    .BeEquivalentTo(endpoint);
             }
         }
     }
