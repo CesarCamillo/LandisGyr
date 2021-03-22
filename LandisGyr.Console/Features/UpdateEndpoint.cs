@@ -4,6 +4,7 @@ using LandisGyr.ConsoleApp.Models;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -63,6 +64,11 @@ namespace LandisGyr.ConsoleApp.Features
 
             // TODO: Checar problema no profile <Endpoint, Endpoint> do AutoMapper
             //_mapper.Map(updatedModel, existingEndpoint);
+
+            if (existingEndpoint is null)
+            {
+                throw new KeyNotFoundException($"Não existe Endpoint para o serial number {updatedModel.SerialNumber}.");
+            }
 
             existingEndpoint.SwitchState = updatedModel.SwitchState;
 
